@@ -1,4 +1,5 @@
 <?php
+
 namespace Ez4us\Tools\convert\Number2Letter;
 
 
@@ -8,7 +9,6 @@ class Number2LetterNonNumericException  extends \Exception
 
     public static function Send()
     {
-        return new self( self::MUST_BE_NUMERIC ) ;
+        return new self(self::MUST_BE_NUMERIC);
     }
-
 }

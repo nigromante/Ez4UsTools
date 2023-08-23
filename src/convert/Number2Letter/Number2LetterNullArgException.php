@@ -1,4 +1,5 @@
 <?php
+
 namespace Ez4us\Tools\convert\Number2Letter;
 
 
@@ -8,7 +9,6 @@ class  Number2LetterNullArgException extends \Exception
 
     public static function Send()
     {
-        return new self( self::NULL_ARG );
+        return new self(self::NULL_ARG);
     }
-
 }
