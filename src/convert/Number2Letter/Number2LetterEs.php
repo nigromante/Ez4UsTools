@@ -5,7 +5,7 @@ namespace Ez4us\Tools\convert\Number2Letter;
 
 final class Number2LetterEs extends Number2Letter
 {
-    private static $words = [
+    private static $CDU_WORDS = [
         'c'   => ['', 'ciento', 'doscientos', 'trescientos', 'cuatrocientos', 'quinientos', 'seiscientos', 'setecientos', 'ochocientos', 'novecientos'],
         'd'   => ['', '', 'veinte', 'trienta', 'cuarenta', 'cincuenta', 'sesenta', 'setenta', 'ochenta', 'noventa'],
         'du'  => ['diez', 'once', 'doce', 'trece', 'catorce', 'quince', 'dieciseis', 'diecisiete', 'dieciocho', 'diecinueve'],
@@ -13,110 +13,109 @@ final class Number2LetterEs extends Number2Letter
         'u'   => ['', 'uno', 'dos', 'tres', 'cuatro', 'cinco', 'seis', 'siete', 'ocho', 'nueve'],
     ];
 
-    private static $groups = ['', 'mil', 'millon', 'mil', 'billon', 'mil', 'millon', 'mil'];
+    private static $CDU_LABELS = ['', 'mil', 'millon', 'mil', 'billon', 'mil', 'millon', 'mil'];
 
 
     public static function execute($value)
     {
-
         parent::execute($value);
-
 
         if ($value == 0)
             return "cero";
 
+        $cduList =  self::groupsCDU($value);
+        $cduLast = count($cduList) - 1;
 
-        $grupos =  self::groupsDCU($value);
+        $response = '';
+        foreach ($cduList as $cduCurrent => $cdu) {
 
-        $nGrupos = count($grupos) - 1;
-
-        $textoFinal = '';
-        foreach ($grupos as $key => $grupo) {
-
-            $texto = self::section($grupo);
-            if ($texto != '') {
-
-                $textoFinal .=  self::sectionLabel($texto, $nGrupos - $key);
+            $cduText = self::section($cdu);
+            if ($cduText != '') {
+                $response .=  self::sectionLabel($cduText, $cduLast - $cduCurrent);
             }
         }
 
-        return trim($textoFinal);
+        return trim($response);
     }
 
 
 
-    private static function section($grupo)
+    private static function section($cdu)
     {
-        $texto = '';
+        extract($cdu);
+        $cduText = '';
 
         // CENTENAS
-        if (isset($grupo['c'])) {
-            if ($grupo['c'] == 1 && ($grupo['d'] == 0 && $grupo['u'] == 0)) {
-                $texto .= 'cien';
+        if (isset($c)) {
+            if ($c == 1 && ($d == 0 && $u == 0)) {
+                $cduText .= 'cien';
             } else {
-                $texto .= self::$words['c'][$grupo['c']];
+                $cduText .= self::$CDU_WORDS['c'][$c];
             }
-            $texto .= ' ';
+            $cduText .= ' ';
         }
 
         // DECENAS
-        if (isset($grupo['d']) && $grupo['d'] != 0) {
-            if ($grupo['d'] == 1) {
-                $texto .= self::$words['du'][$grupo['u']];
+        if (isset($d) && $d != 0) {
+            if ($d == 1) {
+                $cduText .= self::$CDU_WORDS['du'][$u];
             } else
-            if ($grupo['d'] == 2) {
-                $texto .= self::$words['du2'][$grupo['u']];
+            if ($d == 2) {
+                $cduText .= self::$CDU_WORDS['du2'][$u];
             } else {
-                $texto .= self::$words['d'][$grupo['d']];
+                $cduText .= self::$CDU_WORDS['d'][$d];
             }
-            $texto .= ' ';
+            $cduText .= ' ';
         }
 
         //  UNIDADES
-        if (isset($grupo['u']) && $grupo['u'] != 0) {
-            if (isset($grupo['d'])) {
-                if ($grupo['d'] != 0 && ($grupo['d'] != 1 && $grupo['d'] != 2)) {
-                    $texto .= 'y ';
+        if (isset($u) && $u != 0) {
+            if (isset($d)) {
+                if ($d != 0 && ($d != 1 && $d != 2)) {
+                    $cduText .= 'y ';
                 }
-                if ($grupo['d'] != 1 && $grupo['d'] != 2) {
-                    $texto .=  self::$words['u'][$grupo['u']];
+                if ($d != 1 && $d != 2) {
+                    $cduText .=  self::$CDU_WORDS['u'][$u];
                 }
-                $texto .= ' ';
+                $cduText .= ' ';
             } else {
-                $texto .= self::$words['u'][$grupo['u']];
-                $texto .= ' ';
+                $cduText .= self::$CDU_WORDS['u'][$u];
+                $cduText .= ' ';
             }
         }
 
-        return trim($texto);
+        return trim($cduText);
     }
 
 
-    private static function sectionLabel($texto, $grupo)
+    private static function sectionLabel($cduText, $section)
     {
-        $textoGrupo = self::$groups[$grupo];
-        if ($textoGrupo == 'mil' && $texto == 'uno')
-            $texto = '';
+        $label = self::$CDU_LABELS[$section];
 
-        if ($textoGrupo == 'millon') {
-            if ($texto == 'uno') {
-                $texto = 'un';
+        if ($label == 'mil' && $cduText == 'uno')
+            $cduText = '';
+
+        if ($label == 'millon') {
+            if ($cduText == 'uno') {
+                $cduText = 'un';
             } else {
-                $textoGrupo = 'millones';
+                $label = 'millones';
             }
         }
-        if ($textoGrupo == 'billon') {
-            if ($texto == 'uno') {
-                $texto = 'un';
+
+        if ($label == 'billon') {
+            if ($cduText == 'uno') {
+                $cduText = 'un';
             } else {
-                $textoGrupo = 'billones';
+                $label = 'billones';
             }
         }
-        $textoFinal = $texto;
 
-        if ($textoGrupo != '')
-            $textoFinal .= ' ' . $textoGrupo . ' ';
+        $response = $cduText;
 
-        return $textoFinal;
+        if ($label != '')
+            $response .= ' ' . $label . ' ';
+
+        return $response;
     }
 }

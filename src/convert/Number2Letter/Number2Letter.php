@@ -9,7 +9,7 @@ abstract class Number2Letter implements Number2LetterInterface {
     }
 
 
-    public static function fillDCU( $arr ) {
+    public static function fillCDU( $arr ) {
         $keys = [ 'u', 'd', 'c' ];
         $response = [] ;
         foreach( $arr as $k => $v ) {
@@ -18,7 +18,7 @@ abstract class Number2Letter implements Number2LetterInterface {
         return $response ; 
     }
 
-    public static function groupsDCU( $value ) {
+    public static function groupsCDU( $value ) {
         $response = [] ; 
         $digitos = str_split( ""  . $value );
 
@@ -27,12 +27,12 @@ abstract class Number2Letter implements Number2LetterInterface {
             $t =array_pop( $digitos )  ;
             $x[]= (int)$t  ;
             if( count($x) == 3 ) {
-                $response[] = self::fillDCU( $x ); 
+                $response[] = self::fillCDU( $x ); 
                 $x=[];
             } 
         }
         if( count( $x ) > 0 ) {
-            $response[] =self::fillDCU( $x ) ; 
+            $response[] =self::fillCDU( $x ) ; 
         }
 
         return array_reverse($response) ; 
