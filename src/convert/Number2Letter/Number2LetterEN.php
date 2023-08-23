@@ -6,14 +6,13 @@ namespace Ez4us\Tools\convert\Number2Letter;
 final class Number2LetterEN extends Number2Letter
 {
     private static $CDU_WORDS = [
-        'c'   => ['', 'ciento', 'doscientos', 'trescientos', 'cuatrocientos', 'quinientos', 'seiscientos', 'setecientos', 'ochocientos', 'novecientos'],
-        'd'   => ['', '', 'veinte', 'trienta', 'cuarenta', 'cincuenta', 'sesenta', 'setenta', 'ochenta', 'noventa'],
-        'du'  => ['diez', 'once', 'doce', 'trece', 'catorce', 'quince', 'dieciseis', 'diecisiete', 'dieciocho', 'diecinueve'],
-        'du2' => ['veinte', 'veintiun', 'veintidos', 'veintitres', 'veinticuatro', 'veinticinco', 'veintiseis', 'veintisiete', 'veintiocho', 'veintinueve'],
-        'u'   => ['', 'uno', 'dos', 'tres', 'cuatro', 'cinco', 'seis', 'siete', 'ocho', 'nueve'],
+        'c'   => ['', 'one hundred', 'two hundred', 'three hundred', 'four hundred', 'five hundred', 'six hundred', 'seven hundred', 'eight hundred', 'nine hundred'],
+        'd'   => ['', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'],
+        'du'  => ['ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fiveteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'],
+        'u'   => ['', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'],
     ];
 
-    private static $CDU_LABELS = ['', 'mil', 'millon', 'mil', 'billon', 'mil', 'millon', 'mil'];
+    private static $CDU_LABELS = ['', 'thousand', 'millon',  'billion', 'trillion', 'quadrillion' , 'quintillion'];
 
 
     public static function GetText($value)
@@ -21,7 +20,7 @@ final class Number2LetterEN extends Number2Letter
         parent::GetText($value);
 
         if ($value == 0)
-            return "cero";
+            return "zero";
 
         $cduList =  self::groupsCDU($value);
         $cduLast = count($cduList) - 1;
@@ -47,37 +46,31 @@ final class Number2LetterEN extends Number2Letter
 
         // CENTENAS
         if (isset($c)) {
-            if ($c == 1 && ($d == 0 && $u == 0)) {
-                $cduText .= 'cien';
-            } else {
-                $cduText .= self::$CDU_WORDS['c'][$c];
-            }
-            $cduText .= ' ';
+            $cduText .= self::$CDU_WORDS['c'][$c] . ' ' ;
         }
 
         // DECENAS
         if (isset($d) && $d != 0) {
             if ($d == 1) {
-                $cduText .= self::$CDU_WORDS['du'][$u];
+                $cduText .= self::$CDU_WORDS['du'][$u] . ' ' ;
             } else
-            if ($d == 2) {
-                $cduText .= self::$CDU_WORDS['du2'][$u];
-            } else {
+            {
                 $cduText .= self::$CDU_WORDS['d'][$d];
+                if ($u == 0) {
+                    $cduText .= ' ';
+                }
             }
-            $cduText .= ' ';
         }
 
         //  UNIDADES
         if (isset($u) && $u != 0) {
             if (isset($d)) {
-                if ($d != 0 && ($d != 1 && $d != 2)) {
-                    $cduText .= 'y ';
+                if ( $d != 1) {
+                    if( $d != 0 ) {
+                        $cduText .= '-' ;    
+                    }
+                    $cduText .=  self::$CDU_WORDS['u'][$u] . ' ';
                 }
-                if ($d != 1 && $d != 2) {
-                    $cduText .=  self::$CDU_WORDS['u'][$u];
-                }
-                $cduText .= ' ';
             } else {
                 $cduText .= self::$CDU_WORDS['u'][$u];
                 $cduText .= ' ';
@@ -92,24 +85,6 @@ final class Number2LetterEN extends Number2Letter
     {
         $label = self::$CDU_LABELS[$section];
 
-        if ($label == 'mil' && $cduText == 'uno')
-            $cduText = '';
-
-        if ($label == 'millon') {
-            if ($cduText == 'uno') {
-                $cduText = 'un';
-            } else {
-                $label = 'millones';
-            }
-        }
-
-        if ($label == 'billon') {
-            if ($cduText == 'uno') {
-                $cduText = 'un';
-            } else {
-                $label = 'billones';
-            }
-        }
 
         $response = $cduText;
 
