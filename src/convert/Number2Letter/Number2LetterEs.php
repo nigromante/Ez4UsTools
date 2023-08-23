@@ -16,9 +16,9 @@ final class Number2LetterEs extends Number2Letter
     private static $CDU_LABELS = ['', 'mil', 'millon', 'mil', 'billon', 'mil', 'millon', 'mil'];
 
 
-    public static function execute($value)
+    public static function GetText($value)
     {
-        parent::execute($value);
+        parent::GetText($value);
 
         if ($value == 0)
             return "cero";

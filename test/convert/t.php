@@ -6,7 +6,7 @@ require_once "../../vendor/autoload.php" ;
 use Ez4us\Tools\convert\Number2Letter\Number2LetterEs;
 
 function test( $n ) {
-    $response = Number2LetterEs::execute( $n ) ;
+    $response = Number2LetterEs::GetText( $n ) ;
     echo "\n\n $n :: " . $response ;
 }
 

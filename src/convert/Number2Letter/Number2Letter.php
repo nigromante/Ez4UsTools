@@ -4,12 +4,7 @@ namespace Ez4us\Tools\convert\Number2Letter;
 abstract class Number2Letter implements Number2LetterInterface {
 
 
-    public static function length( $value ) {
-        return 1 + (int)log10( $value ) ; 
-    }
-
-
-    public static function fillCDU( $arr ) {
+    private static function fillCDU( $arr ) {
         $keys = [ 'u', 'd', 'c' ];
         $response = [] ;
         foreach( $arr as $k => $v ) {
@@ -18,7 +13,7 @@ abstract class Number2Letter implements Number2LetterInterface {
         return $response ; 
     }
 
-    public static function groupsCDU( $value ) {
+    protected static function groupsCDU( $value ) {
         $response = [] ; 
         $digitos = str_split( ""  . $value );
 
@@ -39,7 +34,7 @@ abstract class Number2Letter implements Number2LetterInterface {
     }
 
 
-    public static function execute( $value ) {
+    public static function GetText( $value ) {
 
         self::EnsuranceInteger( $value ) ; 
 
