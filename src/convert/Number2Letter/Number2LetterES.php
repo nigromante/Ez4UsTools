@@ -3,7 +3,7 @@
 namespace Ez4us\Tools\convert\Number2Letter;
 
 
-final class Number2LetterEs extends Number2Letter
+final class Number2LetterES extends Number2Letter
 {
     private static $CDU_WORDS = [
         'c'   => ['', 'ciento', 'doscientos', 'trescientos', 'cuatrocientos', 'quinientos', 'seiscientos', 'setecientos', 'ochocientos', 'novecientos'],

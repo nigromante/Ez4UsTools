@@ -2,11 +2,11 @@
 system("clear");
 require_once "../../vendor/autoload.php" ; 
 
+use Ez4us\Tools\convert\Number2Letter\Number2LetterES;
 
-use Ez4us\Tools\convert\Number2Letter\Number2LetterEs;
 
 function test( $n ) {
-    $response = Number2LetterEs::GetText( $n ) ;
+    $response = Number2LetterES::GetText( $n ) ;
     echo "\n\n $n :: " . $response ;
 }
 
