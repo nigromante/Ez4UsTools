@@ -8,11 +8,11 @@ final class Number2LetterEN extends Number2Letter
     private static $CDU_WORDS = [
         'c'   => ['', 'one hundred', 'two hundred', 'three hundred', 'four hundred', 'five hundred', 'six hundred', 'seven hundred', 'eight hundred', 'nine hundred'],
         'd'   => ['', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'],
-        'du'  => ['ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fiveteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'],
+        'du'  => ['ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'],
         'u'   => ['', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'],
     ];
 
-    private static $CDU_LABELS = ['', 'thousand', 'millon',  'billion', 'trillion', 'quadrillion' , 'quintillion'];
+    private static $CDU_LABELS = ['', 'thousand', 'million',  'billion', 'trillion', 'quadrillion' , 'quintillion'];
 
 
     public static function GetText($value)

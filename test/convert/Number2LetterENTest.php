@@ -31,14 +31,14 @@ final class Number2LetterENTest extends TestCase
     public function test0()
     {
         $response = Number2LetterEN::GetText(0);
-        $this->assertEquals("cero", $response);
+        $this->assertEquals("zero", $response);
     }
 
 
     public function test4321()
     {
         $response = Number2LetterEN::GetText(4321);
-        $this->assertEquals("cuatro mil trescientos veintiun", $response);
+        $this->assertEquals("four thousand three hundred twenty-one", $response);
     }
 
 
@@ -46,130 +46,130 @@ final class Number2LetterENTest extends TestCase
     public function test1()
     {
         $response = Number2LetterEN::GetText(1);
-        $this->assertEquals("uno", $response);
+        $this->assertEquals("one", $response);
     }
 
     public function test7()
     {
         $response = Number2LetterEN::GetText(7);
-        $this->assertEquals("siete", $response);
+        $this->assertEquals("seven", $response);
     }
 
     public function test10()
     {
         $response = Number2LetterEN::GetText(10);
-        $this->assertEquals("diez", $response);
+        $this->assertEquals("ten", $response);
     }
 
     public function test13()
     {
         $response = Number2LetterEN::GetText(13);
-        $this->assertEquals("trece", $response);
+        $this->assertEquals("thirteen", $response);
     }
 
     public function test20()
     {
         $response = Number2LetterEN::GetText(20);
-        $this->assertEquals("veinte", $response);
+        $this->assertEquals("twenty", $response);
     }
 
     public function test22()
     {
         $response = Number2LetterEN::GetText(22);
-        $this->assertEquals("veintidos", $response);
+        $this->assertEquals("twenty-two", $response);
     }
 
     public function test50()
     {
         $response = Number2LetterEN::GetText(50);
-        $this->assertEquals("cincuenta", $response);
+        $this->assertEquals("fifty", $response);
     }
     public function test57()
     {
         $response = Number2LetterEN::GetText(57);
-        $this->assertEquals("cincuenta y siete", $response);
+        $this->assertEquals("fifty-seven", $response);
     }
 
     public function test100()
     {
         $response = Number2LetterEN::GetText(100);
-        $this->assertEquals("cien", $response);
+        $this->assertEquals("one hundred", $response);
     }
 
     public function test101()
     {
         $response = Number2LetterEN::GetText(101);
-        $this->assertEquals("ciento uno", $response);
+        $this->assertEquals("one hundred one", $response);
     }
 
     public function test200()
     {
         $response = Number2LetterEN::GetText(200);
-        $this->assertEquals("doscientos", $response);
+        $this->assertEquals("two hundred", $response);
     }
 
     public function test212()
     {
         $response = Number2LetterEN::GetText(212);
-        $this->assertEquals("doscientos doce", $response);
+        $this->assertEquals("two hundred twelve", $response);
     }
 
     public function test1000()
     {
         $response = Number2LetterEN::GetText(1000);
-        $this->assertEquals("mil", $response);
+        $this->assertEquals("one thousand", $response);
     }
 
     public function test1318()
     {
         $response = Number2LetterEN::GetText(1318);
-        $this->assertEquals("mil trescientos dieciocho", $response);
+        $this->assertEquals("one thousand three hundred eighteen", $response);
     }
     public function test3826()
     {
         $response = Number2LetterEN::GetText(3826);
-        $this->assertEquals("tres mil ochocientos veintiseis", $response);
+        $this->assertEquals("three thousand eight hundred twenty-six", $response);
     }
 
     public function test10000()
     {
         $response = Number2LetterEN::GetText(10000);
-        $this->assertEquals("diez mil", $response);
+        $this->assertEquals("ten thousand", $response);
     }
 
     public function test10001()
     {
         $response = Number2LetterEN::GetText(10001);
-        $this->assertEquals("diez mil uno", $response);
+        $this->assertEquals("ten thousand one", $response);
     }
     public function test312901()
     {
         $response = Number2LetterEN::GetText(312901);
-        $this->assertEquals("trescientos doce mil novecientos uno", $response);
+        $this->assertEquals("three hundred twelve thousand nine hundred one", $response);
     }
     public function test1000000()
     {
         $response = Number2LetterEN::GetText(1000000);
-        $this->assertEquals("un millon", $response);
+        $this->assertEquals("one million", $response);
     }
     public function test1000001()
     {
         $response = Number2LetterEN::GetText(1000001);
-        $this->assertEquals("un millon uno", $response);
+        $this->assertEquals("one million one", $response);
     }
     public function test15000001()
     {
         $response = Number2LetterEN::GetText(15000001);
-        $this->assertEquals("quince millones uno", $response);
+        $this->assertEquals("fifteen million one", $response);
     }
     public function test415000001()
     {
         $response = Number2LetterEN::GetText(415000001);
-        $this->assertEquals("cuatrocientos quince millones uno", $response);
+        $this->assertEquals("four hundred fifteen million one", $response);
     }
     public function test7415000001()
     {
         $response = Number2LetterEN::GetText(7415000001);
-        $this->assertEquals("siete mil cuatrocientos quince millones uno", $response);
+        $this->assertEquals("seven billion four hundred fifteen million one", $response);
     }
 }
