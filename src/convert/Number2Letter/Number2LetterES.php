@@ -39,52 +39,57 @@ final class Number2LetterES extends Number2Letter
     }
 
 
+    private static function centenas($cdu) {
+        extract($cdu);
+        if (isset($c) && $c != 0) {
+            if ($c == 1 && ($d == 0 && $u == 0)) {
+                return 'cien ';
+            } 
+            return self::$CDU_WORDS['c'][$c] . ' ' ;
+        }
+        return '';
+    }
+
+    private static function decenas($cdu) {
+        extract($cdu);
+        if (isset($d) && $d != 0) {
+            if ($d == 1) {
+                return self::$CDU_WORDS['du'][$u] . ' ' ;
+            } 
+            if ($d == 2) {
+                return self::$CDU_WORDS['du2'][$u] . ' ' ;
+            } 
+            return self::$CDU_WORDS['d'][$d] . ' ' ;
+        }
+        return '';
+    }
+
+    private static function unidades($cdu) {
+        extract($cdu);
+        if (isset($u) && $u != 0) {
+            if (isset($d) && ($d==1 || $d==2) ) { 
+                return '' ; 
+            }
+
+            if (isset($d) && $d >=3) {
+                return 'y ' . self::$CDU_WORDS['u'][$u] . ' ' ;
+            }
+             
+            return  self::$CDU_WORDS['u'][$u] . ' ' ;
+        }
+        return '';
+    }
+
 
     private static function section($cdu)
     {
-        extract($cdu);
-        $cduText = '';
 
-        // CENTENAS
-        if (isset($c)) {
-            if ($c == 1 && ($d == 0 && $u == 0)) {
-                $cduText .= 'cien';
-            } else {
-                $cduText .= self::$CDU_WORDS['c'][$c];
-            }
-            $cduText .= ' ';
-        }
+        return trim( 
+                self::centenas( $cdu ) .
+                self::decenas($cdu) .
+                self::unidades($cdu) 
+            ) ;
 
-        // DECENAS
-        if (isset($d) && $d != 0) {
-            if ($d == 1) {
-                $cduText .= self::$CDU_WORDS['du'][$u];
-            } else
-            if ($d == 2) {
-                $cduText .= self::$CDU_WORDS['du2'][$u];
-            } else {
-                $cduText .= self::$CDU_WORDS['d'][$d];
-            }
-            $cduText .= ' ';
-        }
-
-        //  UNIDADES
-        if (isset($u) && $u != 0) {
-            if (isset($d)) {
-                if ($d != 0 && ($d != 1 && $d != 2)) {
-                    $cduText .= 'y ';
-                }
-                if ($d != 1 && $d != 2) {
-                    $cduText .=  self::$CDU_WORDS['u'][$u];
-                }
-                $cduText .= ' ';
-            } else {
-                $cduText .= self::$CDU_WORDS['u'][$u];
-                $cduText .= ' ';
-            }
-        }
-
-        return trim($cduText);
     }
 
 
