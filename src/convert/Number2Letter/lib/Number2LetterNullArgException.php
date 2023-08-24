@@ -1,6 +1,6 @@
 <?php
 
-namespace Ez4us\Tools\convert\Number2Letter;
+namespace Ez4us\Tools\convert\Number2Letter\lib;
 
 
 class  Number2LetterNullArgException extends \Exception

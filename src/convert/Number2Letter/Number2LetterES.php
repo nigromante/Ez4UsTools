@@ -1,6 +1,8 @@
 <?php
 
 namespace Ez4us\Tools\convert\Number2Letter;
+use Ez4us\Tools\convert\Number2Letter\lib\Number2LetterInterface ;
+use Ez4us\Tools\convert\Number2Letter\lib\Number2Letter ;
 
 final class Number2LetterES implements Number2LetterInterface
 {
@@ -64,7 +66,7 @@ final class Number2LetterES implements Number2LetterInterface
         return '';
     }
 
-    private static function Label($cduText, $section)
+    private static function label($cduText, $section)
     {
         $label = self::$CDU_LABELS[$section];
 

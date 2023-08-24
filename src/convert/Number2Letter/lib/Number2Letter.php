@@ -1,6 +1,9 @@
 <?php
 
-namespace Ez4us\Tools\convert\Number2Letter;
+namespace Ez4us\Tools\convert\Number2Letter\lib;
+
+use Ez4us\Tools\convert\Number2Letter\lib\Number2LetterNonNumericException;
+use Ez4us\Tools\convert\Number2Letter\lib\Number2LetterNullArgException;
 
 trait Number2Letter
 {
@@ -21,7 +24,7 @@ trait Number2Letter
 
             $cduText = self::section($cdu);
             if ($cduText != '') {
-                $response .=  self::Label($cduText, $cduLast - $cduCurrent);
+                $response .=  self::label($cduText, $cduLast - $cduCurrent);
             }
         }
         return trim($response);

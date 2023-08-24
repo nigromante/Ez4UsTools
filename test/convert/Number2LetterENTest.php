@@ -3,8 +3,9 @@ require_once "../../vendor/autoload.php";
 
 use PHPUnit\Framework\TestCase;
 
-use Ez4us\Tools\convert\Number2Letter\Number2LetterNullArgException;
-use Ez4us\Tools\convert\Number2Letter\Number2LetterNonNumericException;
+use Ez4us\Tools\convert\Number2Letter\lib\Number2LetterNonNumericException;
+use Ez4us\Tools\convert\Number2Letter\lib\Number2LetterNullArgException;
+
 use Ez4us\Tools\convert\Number2Letter\Number2LetterEN;
 
 
