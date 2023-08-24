@@ -37,48 +37,49 @@ final class Number2LetterEN extends Number2Letter
         return trim($response);
     }
 
+    private static function centenas($cdu) {
+        extract($cdu);
+        if (isset($c) && $c != 0) {
+            return self::$CDU_WORDS['c'][$c] . ' ' ;
+        }
+        return '';
+    }
 
+    private static function decenas($cdu) {
+        extract($cdu);
+        if (isset($d) && $d != 0) {
+            if ($d == 1) {
+                return self::$CDU_WORDS['du'][$u] . ' ' ;
+            } 
+            return self::$CDU_WORDS['d'][$d] ;
+        }
+        return '';
+    }
+
+    private static function unidades($cdu) {
+        extract($cdu);
+        if (isset($u) && $u != 0) {
+            if (isset($d) && $d !=0) {
+                if( $d == 1)
+                    return '';
+                return '-' . self::$CDU_WORDS['u'][$u] . ' ';
+            }
+            return self::$CDU_WORDS['u'][$u] . ' ' ;
+        }
+        return '';
+    }
 
     private static function section($cdu)
     {
-        extract($cdu);
-        $cduText = '';
 
-        // CENTENAS
-        if (isset($c)) {
-            $cduText .= self::$CDU_WORDS['c'][$c] . ' ' ;
-        }
+        return trim( 
+                self::centenas( $cdu ) .
+                self::decenas($cdu) .
+                self::unidades($cdu) 
+            ) ;
 
-        // DECENAS
-        if (isset($d) && $d != 0) {
-            if ($d == 1) {
-                $cduText .= self::$CDU_WORDS['du'][$u] . ' ' ;
-            } else
-            {
-                $cduText .= self::$CDU_WORDS['d'][$d];
-                if ($u == 0) {
-                    $cduText .= ' ';
-                }
-            }
-        }
-
-        //  UNIDADES
-        if (isset($u) && $u != 0) {
-            if (isset($d)) {
-                if ( $d != 1) {
-                    if( $d != 0 ) {
-                        $cduText .= '-' ;    
-                    }
-                    $cduText .=  self::$CDU_WORDS['u'][$u] . ' ';
-                }
-            } else {
-                $cduText .= self::$CDU_WORDS['u'][$u];
-                $cduText .= ' ';
-            }
-        }
-
-        return trim($cduText);
     }
+   
 
 
     private static function sectionLabel($cduText, $section)
