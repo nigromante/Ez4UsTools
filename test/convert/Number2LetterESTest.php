@@ -10,7 +10,6 @@ use Ez4us\Tools\convert\Number2Letter\Number2LetterNonNumericException;
 final class Number2LetterESTest extends TestCase
 {
 
-
     public function testNullParameter()
     {
 

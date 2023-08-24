@@ -5,6 +5,29 @@ namespace Ez4us\Tools\convert\Number2Letter;
 trait Number2Letter
 {
 
+    public static function GetText($value)
+    {
+        self::EnsuranceInteger($value);
+
+        if ($value == 0) {
+            return self::zero();
+        }
+
+        $cduList =  self::groupsCDU($value);
+        $cduLast = count($cduList) - 1;
+
+        $response = '';
+        foreach ($cduList as $cduCurrent => $cdu) {
+
+            $cduText = self::section($cdu);
+            if ($cduText != '') {
+                $response .=  self::Label($cduText, $cduLast - $cduCurrent);
+            }
+        }
+        return trim($response);
+    }
+
+
     private static function fillCDU($arr)
     {
         $keys = ['u', 'd', 'c'];
@@ -36,27 +59,7 @@ trait Number2Letter
         return array_reverse($response);
     }
 
-    public static function GetText($value)
-    {
-        self::EnsuranceInteger($value);
 
-        if ($value == 0) {
-            return self::$ZERO;
-        }
-
-        $cduList =  self::groupsCDU($value);
-        $cduLast = count($cduList) - 1;
-
-        $response = '';
-        foreach ($cduList as $cduCurrent => $cdu) {
-
-            $cduText = self::section($cdu);
-            if ($cduText != '') {
-                $response .=  self::Label($cduText, $cduLast - $cduCurrent);
-            }
-        }
-        return trim($response);
-    }
 
     protected static function section($cdu)
     {

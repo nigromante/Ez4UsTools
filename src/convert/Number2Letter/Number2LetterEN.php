@@ -6,8 +6,6 @@ final class Number2LetterEN implements Number2LetterInterface
 {
     use Number2Letter;
 
-    public static $ZERO = 'zero';
-
     private static $CDU_WORDS = [
         'c'   => ['', 'one hundred', 'two hundred', 'three hundred', 'four hundred', 'five hundred', 'six hundred', 'seven hundred', 'eight hundred', 'nine hundred'],
         'd'   => ['', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'],
@@ -17,8 +15,11 @@ final class Number2LetterEN implements Number2LetterInterface
 
     private static $CDU_LABELS = ['', 'thousand', 'million',  'billion', 'trillion', 'quadrillion', 'quintillion'];
 
+    private static function zero() {
+        return 'zero' ; 
+    }
 
-    public static function centenas($cdu)
+    private static function centenas($cdu)
     {
         extract($cdu);
         if (isset($c) && $c != 0) {
@@ -27,7 +28,7 @@ final class Number2LetterEN implements Number2LetterInterface
         return '';
     }
 
-    public static function decenas($cdu)
+    private static function decenas($cdu)
     {
         extract($cdu);
         if (isset($d) && $d != 0) {
@@ -39,7 +40,7 @@ final class Number2LetterEN implements Number2LetterInterface
         return '';
     }
 
-    public static function unidades($cdu)
+    private static function unidades($cdu)
     {
         extract($cdu);
         if (isset($u) && $u != 0) {
@@ -53,7 +54,7 @@ final class Number2LetterEN implements Number2LetterInterface
         return '';
     }
 
-    public static function Label($cduText, $section)
+    private static function Label($cduText, $section)
     {
         $label = self::$CDU_LABELS[$section];
 
@@ -65,4 +66,5 @@ final class Number2LetterEN implements Number2LetterInterface
 
         return $response;
     }
+    
 }
